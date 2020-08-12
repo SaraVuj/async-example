@@ -7,6 +7,7 @@ from twisted.internet.defer import gatherResults
 import json
 import time
 
+
 def onError(ignored):
     print(ignored)
 
@@ -21,7 +22,8 @@ def printBody(body):
     parsed_body = json.loads(body)
     for m in parsed_body:
         try:
-            print(m['match_date'] + ': ' + m['match_hometeam_name'] + ':' + m['match_awayteam_name'] + ' ----> ' +  m['match_hometeam_score'] + ':' + m['match_awayteam_score'])
+            print(m['match_date'] + ': ' + m['match_hometeam_name'] + ':' + m['match_awayteam_name'] + ' ----> ' +
+                  m['match_hometeam_score'] + ':' + m['match_awayteam_score'])
         except TypeError:
             pass
 
