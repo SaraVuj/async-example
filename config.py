@@ -1,5 +1,0 @@
-URL = 'https://apiv2.apifootball.com/?action=get_events'
-APIkey = '104cc8a9dba5bbcf5a3a590e6e7b1485314147a2f02d845d1fecef45f14e0cc9'
-league_id = '148'
-date_from = '2019-01-01'
-date_to = '2019-02-01'
