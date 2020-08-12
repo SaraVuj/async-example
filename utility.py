@@ -15,3 +15,8 @@ while end_date.month <= 12:
         break
     end_date = datetime.date(start_date.year, end_date.month + 1, 1)
 
+start_date = datetime.date(start_date.year, end_date.month, 1)
+end_date = datetime.date(start_date.year + 1, 1, 1)
+url = URL + '&from=' + start_date.strftime("%Y-%m-%d") + '&to=' + end_date.strftime("%Y-%m-%d") \
+          + '&league_id=' + league_id + '&APIkey=' + APIkey
+URLS.append(url)
