@@ -1,15 +1,12 @@
 import asyncio
 import requests
-from config import USER_AGENT
 from utility import URLS
 import json
 import time
 
 
-async def send_request(url):
-    headers = {'User-Agent': USER_AGENT}
-    response = requests.get(url, headers=headers)
-    parsed_body = json.loads(response.content)
+def print_response(body):
+    parsed_body = json.loads(body)
     for m in parsed_body:
         try:
             print(
@@ -19,12 +16,18 @@ async def send_request(url):
             pass
 
 
-async def main():
-    calls = []
+@asyncio.coroutine
+def main():
+    loop = asyncio.get_event_loop()
+    futures = []
     for u in URLS:
-        calls.append(send_request(u))
+        f = loop.run_in_executor(None, requests.get, u)
+        futures.append(f)
 
-    await asyncio.gather(*calls)
+    for f in futures:
+        r = yield from f
+        print_response(r.text)
+
 
 loop = asyncio.get_event_loop()
 start_time = time.time()
