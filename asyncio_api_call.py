@@ -1,23 +1,11 @@
 import asyncio
 import requests
-from utility import URLS
-import json
+from utility import URLS, print_response
 import time
 
 
-def print_response(body):
-    parsed_body = json.loads(body)
-    for m in parsed_body:
-        try:
-            print(
-                m['match_date'] + ': ' + m['match_hometeam_name'] + ':' + m['match_awayteam_name'] + ' ----> ' +
-                m['match_hometeam_score'] + ':' + m['match_awayteam_score'])
-        except Exception:
-            pass
-
-
 @asyncio.coroutine
-def main():
+def get_response():
     loop = asyncio.get_event_loop()
     futures = []
     for u in URLS:
@@ -31,5 +19,5 @@ def main():
 
 loop = asyncio.get_event_loop()
 start_time = time.time()
-loop.run_until_complete(main())
+loop.run_until_complete(get_response())
 print(time.time() - start_time)
